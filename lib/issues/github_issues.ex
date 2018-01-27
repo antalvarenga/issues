@@ -2,8 +2,7 @@ defmodule Issues.GithubIssues do
   @user_agent [{"User-agent", "antalvarenga"}] #Github requires this header
 
   # use a module attribute to fetch the value at compile time​
-  @github_url Application.get_env(​:issues​, ​:github_url​)
-
+  @github_url Application.get_env(:issues, :github_url)
 
 
   def fetch(user, project) do
@@ -17,10 +16,10 @@ defmodule Issues.GithubIssues do
   end
 
   def handle_response({:ok, %{status_code: 200, body: body}}) do
-    {:ok​, Poison.Parser.parse!(body)}
+    { :ok, Poison.Parser.parse!(body) }
   end
 
   def handle_response({_, %{status_code: _, body: body}}) do
-    {:error, Poison.Parser.parse!(body)}
+    { :error, Poison.Parser.parse!(body) }
   end
 end
